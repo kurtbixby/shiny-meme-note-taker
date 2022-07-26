@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const api = require('./routes/api');
 
+// Use process.env.PORT for the env PORT variable 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -9,7 +10,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Uses the API router for the /api routes
 app.use('/api', api);
+
 app.use(express.static('public'));
 
 // GET Route for homepage
@@ -17,6 +20,7 @@ app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
+// GET Route for notes
 app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
